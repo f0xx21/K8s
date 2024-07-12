@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoriametrics
+  namespace: argocd
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - values.yaml
+    repoURL: 'https://github.com/VictoriaMetrics/VictoriaMetrics'
+    targetRevision: 6.16.0
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace

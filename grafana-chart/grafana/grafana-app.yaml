@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring  # Настройте namespace, где вы хотите установить Grafana
+  project: default
+  source:
+    helm:
+      valueFiles:
+         - G://Soft/K8s/grafana-chart/grafana/values.yaml # Укажите здесь путь к вашему файлу values.yaml для настройки Grafana
+    repoURL: 'https://grafana.github.io/helm-charts'
+    chart: grafana
+    targetRevision: 7.5.10  # Укажите версию Grafana, которую вы хотите установить
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

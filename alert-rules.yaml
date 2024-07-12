@@ -1,0 +1,11 @@
+groups:
+  - name: example
+    rules:
+      - alert: HighCpuUsage
+        expr: sum(rate(container_cpu_usage_seconds_total{namespace="monitoring", pod=~"loki-0.*"}[5m])) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CEPIY usage detected for pod in deployment"
+          description: "Pod {{ $labels.loki-0 }} in namespace {{ $labels.monitoring }} is using CPU > 0%"

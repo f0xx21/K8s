@@ -1,0 +1,22 @@
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 5Gi
+promtail:
+  enabled: true
+grafana:
+  enabled: true
+  adminPassword: YWRtaW4=
+  service:
+    type: NodePort
+
+prometheus-node-exporter:
+  enabled: true
+
+
+#service:
+ # type: NodePort
+ # nodePort: 32000
+ # port: 80
+ # targetPort: 3000

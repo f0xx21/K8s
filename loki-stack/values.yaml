@@ -1,0 +1,15 @@
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 10Gi
+promtail:
+  enabled: true
+grafana:
+  enabled: true
+  adminPassword: 12345
+  service:
+    type: NodePort
+
+prometheus-node-exporter:
+  enabled: true
