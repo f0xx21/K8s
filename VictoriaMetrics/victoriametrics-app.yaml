@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoriametrics
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    chart: victoriametrics
+    repoURL: 'https://github.com/f0xx21/K8s.git'
+    targetRevision: 1.101.0
+    helm:
+      parameters:
+        - name: "vmagent.enabled"
+          value: "true"
+        - name: "vmalert.enabled"
+          value: "true"
+        - name: "vmselect.enabled"
+          value: "true"
+        - name: "vminsert.enabled"
+          value: "true"
+        - name: "vmstorage.enabled"
+          value: "true"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
