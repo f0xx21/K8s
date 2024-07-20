@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-script
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-python-script
+  template:
+    metadata:
+      labels:
+        app: my-python-script
+    spec:
+      containers:
+      - name: my-python-script
+        image: my-python-script
+        imagePullPolicy: IfNotPresent
